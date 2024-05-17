@@ -109,11 +109,7 @@ kernel/arch/arm/boot/zImage: $(ARM_ROOT) kernel/.config
 	mkdir -p $(LOGS)
 	cd kernel && make clean && nice -n 19 make $(JOBS) >$(LOGS)/kernel.log 2>&1
 
-kernel/.config: $(DOWNLOADS)/golinux-tt1114405.tar.gz
-	cd src && tar xf ../$(DOWNLOADS)/golinux-tt1114405.tar.gz
-	ln -s src/linux-s3c24xx kernel
-	cd kernel && patch -p1 <$(ROOT)/patchs/kernel_tt1114405_opentom.patch
-	cp $(CONFIGS)/kernel_config.no_console kernel/.config
+kernel/.config: cp $(CONFIGS)/kernel_config.no_console kernel/.config
 
 $(ARM_ROOT): $(ARMGCC)/lib
 	mkdir -p $(ARM_ROOT)/bin
