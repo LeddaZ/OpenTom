@@ -187,7 +187,7 @@ build/microwin/src: $(DOWNLOADS)/microwin_9ffcd17.tgz
 		else \
 			touch microwin/src; \
 		fi; \
-		cd microwin && patch -p1 <$(ROOT)/patchs/microwin_git_opentom.patch; \
+		cd microwin && patch -p1 <$(ROOT)/patches/microwin_git_opentom.patch; \
 	}
 
 dropbear: $(TOMDIST)/bin/dropbear
@@ -226,7 +226,7 @@ extra_libs: sdl_mixer sdl_image sdl_ttf libmad glib1 glib2 bluez-libs curl libid
 sdl: $(ARM_ROOT)/usr/include/SDL/SDL.h
 $(ARM_ROOT)/usr/include/SDL/SDL.h: $(DOWNLOADS)/SDL-1.2.15.tar.gz $(ARM_ROOT)/usr/include/microwin/nano-X.h
 	cd build && tar xf ../Downloads/SDL-1.2.15.tar.gz && cd SDL-1.2.15 && { \
-		patch -p1 <../../patchs/SDL-1.2.1_opentom.patch && \
+		patch -p1 <../../patches/SDL-1.2.1_opentom.patch && \
 		./configure --prefix=$(ARM_APPROOT) --host=arm-linux --disable-joystick --disable-cdrom --disable-alsa --disable-esd --disable-pulseaudio --disable-arts --disable-nas --disable-diskaudio --disable-mintaudio --disable-nasm --disable-altivec --disable-ipod --disable-video-x11 --disable-dga --disable-video-x11-vm --disable-video-x11-xv --disable-video-x11-xme --disable-video-x11-xrandr --disable-video-photon --disable-video-carbon --disable-cocoa --disable-ps2gs  --disable-ps3  --disable-ggi  --disable-svga  --disable-vgl  --disable-wscons --disable-video-aalib --disable-video-directfb --disable-video-caca --disable-video-qtopia --disable-video-picogui --disable-video-xbios --disable-video-gem --disable-video-opengl --disable-osmesa-shared --disable-screensaver --disable-directx --disable-atari-ldg  --enable-video-nanox --enable-nanox-share-memory --disable-video-fbcon >$(LOGS)/sdl.log; \
 		make $(JOBS) install >>$(LOGS)/sdl.log 2>&1 ; \
 	}
@@ -251,7 +251,7 @@ sdl_image: $(ARM_ROOT)/usr/include/SDL/SDL_image.h
 $(ARM_ROOT)/usr/include/SDL/SDL_image.h: $(DOWNLOADS)/SDL_image-1.2.12.tar.gz $(ARM_ROOT)/usr/include/SDL/SDL.h
 	cd build && { \
 		tar xf ../Downloads/SDL_image-1.2.12.tar.gz && cd SDL_image* && { \
-			patch -p1 <../../patchs/SDL_image_opentom.patch; \
+			patch -p1 <../../patches/SDL_image_opentom.patch; \
 			./configure --prefix=$(ARM_APPROOT) --host=$(T_ARCH) >$(LOGS)/SDL_images.log; \
 			make $(JOBS) install >>$(LOGS)/SDL_images.log 2>&1; \
 		} \
@@ -328,7 +328,7 @@ build/nxlib: $(DOWNLOADS)/nxlib_7adaf0e.tgz
                 else \
                         touch nxlib; \
 		fi; \
-                cd nxlib && patch -p1 <$(ROOT)/patchs/nxlib_git_opentom.patch; \
+                cd nxlib && patch -p1 <$(ROOT)/patches/nxlib_git_opentom.patch; \
 		cp -Rf /usr/include/X11 .; \
 	}
 
@@ -343,7 +343,7 @@ $(ARM_ROOT)/usr/include/FL/Fl.H: $(DOWNLOADS)/fltk-1.3.2-source.tar.gz $(ARM_ROO
 	cd build && { \
 		if ! test -d fltk-1.3.2*; then \
 			tar xf ../Downloads/fltk-1.3.2-source.tar.gz && cd fltk-1.3.2 && { \
-				patch -p1 <../../patchs/fltk-1.3.2_opentom_nxlib.patch; \
+				patch -p1 <../../patches/fltk-1.3.2_opentom_nxlib.patch; \
 				mogrify -resize 50% test/pixmaps/black*.xbm test/pixmaps/white*.xbm; \
 				./configure --prefix=$(ARM_SYSROOT)/usr --host=arm-linux --x-includes=$(ARM_SYSROOT)/usr/include \
 					--x-libraries=$(ARM_SYSROOT)/usr/lib --enable-shared --disable-gl --disable-xdbe \
@@ -362,8 +362,8 @@ $(ARM_ROOT)/usr/include/glib-1.2: $(DOWNLOADS)/glib-1.2.10.tar.gz
 	chmod 755 $(ARM_APPROOT)/info/dir
 	cd build && { \
 		tar xf ../Downloads/glib-1.2.10.tar.gz && cd glib-1.2.10 && { \
-			patch -p1 <../../patchs/glib-1.2.10_ready2make_arm.patch; \
-			patch -p1 <../../patchs/glib-1.2.10_pretty_function.patch; \
+			patch -p1 <../../patches/glib-1.2.10_ready2make_arm.patch; \
+			patch -p1 <../../patches/glib-1.2.10_pretty_function.patch; \
 			make $(JOBS) >$(LOGS)/glib1.log 2>&1; \
 			make install >>$(LOGS)/glib1.log; \
 		}; \
@@ -420,7 +420,7 @@ $(TOMDIST)/bin/espeak: Downloads/pa_stable_v19_20140130.tgz Downloads/espeak-1.4
 		make $(JOBS) install >$(LOGS)/pa_stable.log; }
 	cd build && unzip ../Downloads/espeak-1.48.02-source.zip && cd espeak-1.48* && { \
 		cp src/portaudio19.h src/portaudio.h; \
-		patch -p1 <../../patchs/espeak-1.48.01-source_opentom.patch; \
+		patch -p1 <../../patches/espeak-1.48.01-source_opentom.patch; \
 		make -C src $(JOBS) install >$(LOGS)/espeak.log; \
 		cp $(ARM_APPROOT)/bin/espeak $(TOMDIST)/bin; \
 	}
@@ -481,7 +481,7 @@ csrinit: $(TOMDIST)/bin/csrinit
 $(TOMDIST)/bin/csrinit: $(DOWNLOADS)/csrinit-tt531604.tar.gz
 	cd build && { \
 		tar xf ../Downloads/csrinit-tt531604.tar.gz; \
-		cd csrinit && patch -p1 <../../patchs/csrinit_lowTX.patch && arm-linux-gcc -o $(TOMDIST)/bin/csrinit -DSUPPORT_USB *.c -lusb; \
+		cd csrinit && patch -p1 <../../patches/csrinit_lowTX.patch && arm-linux-gcc -o $(TOMDIST)/bin/csrinit -DSUPPORT_USB *.c -lusb; \
 	}
 
 bluez-utils: $(ARM_ROOT)/usr/bin/rfcomm
@@ -500,7 +500,7 @@ $(ARM_ROOT)/usr/bin/rfcomm: $(DOWNLOADS)/bluez-utils-2.15.tar.gz $(ARM_ROOT)/usr
 pppd: $(TOMDIST)/bin/pppd
 $(TOMDIST)/bin/pppd: $(DOWNLOADS)/ppp-2.4.7.tar.gz
 	cd build && tar xf ../Downloads/ppp-2.4.7.tar.gz && cd ppp-2.4.7 && { \
-		patch -p1 <../../patchs/ppp-2.4.7_opentom.patch && \
+		patch -p1 <../../patches/ppp-2.4.7_opentom.patch && \
 		./configure --prefix=$(ARM_APPROOT) --host=$(T_ARCH) >$(LOGS)/ppp.log && \
 		make -C pppd $(JOBS) install >>$(LOGS)/ppp.log && \
 		cp $(ARM_APPROOT)/sbin/pppd $(TOMDIST)/bin/pppd; \
