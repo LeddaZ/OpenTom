@@ -109,7 +109,8 @@ kernel/arch/arm/boot/zImage: $(ARM_ROOT) kernel/.config
 	mkdir -p $(LOGS)
 	cd kernel && make clean && nice -n 19 make $(JOBS) >$(LOGS)/kernel.log 2>&1
 
-kernel/.config: cp $(CONFIGS)/kernel_config.no_console kernel/.config
+kernel/.config: $(CONFIGS)/kernel_config.no_console
+	cp $(CONFIGS)/kernel_config.no_console kernel/.config
 
 $(ARM_ROOT): $(ARMGCC)/lib
 	mkdir -p $(ARM_ROOT)/bin
