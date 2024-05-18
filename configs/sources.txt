@@ -52,7 +52,7 @@ wget -O navit-R7213.tar.gz https://github.com/navit-gps/navit/archive/R7213.tar.
 wget http://downloads.sourceforge.net/project/scummvm/scummvm/1.6.0/scummvm-1.6.0.tar.bz2
 wget http://downloads.sourceforge.net/project/linapple/linapple/linapple-2a/linapple-src_2a.tar.bz2
 wget -O OpenDUNE-0.8.zip https://github.com/OpenDUNE/OpenDUNE/archive/0.8.zip
-wget http://www.users.waitrose.com/~thunor/pipepanic/dload/pipepanic-0.1.3-source.tar.gz
+wget https://src.fedoraproject.org/lookaside/pkgs/pipepanic/pipepanic-0.1.3-source.tar.gz/99b68e990012b2f58c184b8ba9e4fb4d/pipepanic-0.1.3-source.tar.gz
 wget http://downloads.sourceforge.net/project/dragontech/Martian%20Memory/Martian%20Memory%201.2/martian_source.tgz
 wget http://downloads.sourceforge.net/project/jooleem/jooleem/0.1.4/jooleem_0.1.4_src.zip
 wget http://downloads.sourceforge.net/project/jooleem/jooleem/0.1.4/jooleem_0.1.4_win32_bin.zip
